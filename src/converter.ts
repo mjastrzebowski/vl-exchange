@@ -1,9 +1,9 @@
 import {computedFrom} from 'aurelia-framework';
 
 export class Welcome {
-  heading: string = 'Welcome to the Aurelia Navigation App';
-  firstName: string = 'John';
-  lastName: string = 'Doe';
+  heading: string = 'Welcome to the Currency Converter';
+  firstName: string = 'Michał';
+  lastName: string = 'Jastrzębowski';
   previousValue: string = this.fullName;
 
   @computedFrom('firstName', 'lastName')
