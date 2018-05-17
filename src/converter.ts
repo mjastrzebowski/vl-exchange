@@ -1,26 +1,53 @@
-import {computedFrom} from 'aurelia-framework';
+import {computedFrom, lazy} from 'aurelia-framework';
+import {HttpClient} from 'aurelia-fetch-client';
 
-export class Welcome {
+// polyfill fetch client conditionally
+const fetch = !self.fetch ? System.import('isomorphic-fetch') : Promise.resolve(self.fetch);
+
+interface Map<T> {
+  [key: string]: T;
+}
+
+interface Exchange {
+  base: string;
+  date: string;
+  rates: Map<number>;
+}
+
+export class Converter {
+  api: string = 'https://exchangeratesapi.io/api/';
   heading: string = 'Welcome to the Currency Converter';
-  firstName: string = 'Michał';
-  lastName: string = 'Jastrzębowski';
-  previousValue: string = this.fullName;
+  http: HttpClient;
+  value: number = 1;
+  exchange: Exchange;
+  
+  // previousValue: string = this.fullName;
+
+  constructor(@lazy(HttpClient) private getHttpClient: () => HttpClient) {}
 
   @computedFrom('firstName', 'lastName')
   get fullName(): string {
-    return `${this.firstName} ${this.lastName}`;
+    return `${this.value} ${this.exchange.rates['PLN']}`;
   }
 
-  submit() {
-    // this.previousValue = this.fullName;
-    alert(`Welcome, ${this.fullName}!`);
+  async activate(): Promise<void> {
+    // ensure fetch is polyfilled before we create the http client
+    await fetch;
+    const http = this.http = this.getHttpClient();
+
+    http.configure(config => {
+      config
+        .useStandardConfiguration()
+        .withBaseUrl(this.api);
+    });
+
+    const response = await http.fetch('latest');
+    this.exchange = await response.json();
   }
 
-  canDeactivate(): boolean | undefined {
-    if (this.fullName !== this.previousValue) {
-      return confirm('Are you sure you want to leave?');
-    }
-  }
+  // submit() {
+  //   alert(`Welcome, ${this.fullName}!`);
+  // }
 }
 
 export class UpperValueConverter {
