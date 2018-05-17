@@ -3,7 +3,13 @@
     <h2>${heading}</h2>
     <form role="form" submit.delegate="submit()">
       <div class="form-group">
-        <label for="fn">Amount from:</label>
+        <label for="fn">From:</label>
+        <select value.bind="selectedProductId">
+          <option model.bind="null">Choose...</option>
+          <option repeat.for="rate of Currency">
+            ${rate} - ${rate.key}
+          </option>
+        </select>
         <input type="text" value.bind="amountFrom" class="form-control" id="af">
       </div>
       <div class="form-group">

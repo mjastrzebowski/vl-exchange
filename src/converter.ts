@@ -4,6 +4,14 @@ import {HttpClient} from 'aurelia-fetch-client';
 // polyfill fetch client conditionally
 const fetch = !self.fetch ? System.import('isomorphic-fetch') : Promise.resolve(self.fetch);
 
+enum Currency {
+  AUD = 'AUD',
+  PLN = 'PLN',
+  USD = 'USD',
+  GBP = 'GBP',
+  EUR = 'EUR'
+}
+
 interface Map<T> {
   [key: string]: T;
 }
