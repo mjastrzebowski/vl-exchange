@@ -3,8 +3,8 @@
     <h2>${heading}</h2>
     <form role="form" submit.delegate="submit()">
       <div class="form-group">
-        <label for="fn">From:</label>
-        <select value.bind="currencyFrom">
+        <label for="cf">From:</label>
+        <select value.bind="currencyFrom" id="cf">
           <option repeat.for="currency of currencies" value.bind="currency">
             ${currency}
           </option>
@@ -12,12 +12,17 @@
         <input type="text" value.bind="amountFrom" class="form-control" id="af">
       </div>
       <div class="form-group">
-        <label for="ln">Amount to:</label>
-        <input type="text" value.bind="amountTo" class="form-control" id="at">
+        <label for="ct">To:</label>
+        <select value.bind="currencyTo" id="ct">
+          <option repeat.for="currency of currencies" value.bind="currency">
+            ${currency}
+          </option>
+        </select>
+        <input type="text" value.to-view="amountFrom | currencyFormat: exchange.rates[currencyFrom]" class="form-control" id="at">
       </div>
       <div class="form-group">
         <label>Convert</label>
-        <p class="help-block">${fullName | upper}</p>
+        <p class="help-block">${amountTo}</p>
       </div>
       <button type="submit" class="btn btn-default">Submit</button>
     </form>

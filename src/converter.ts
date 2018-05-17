@@ -22,22 +22,30 @@ interface Exchange {
   rates: Map<number>;
 }
 
+export class CurrencyFormatValueConverter {
+  toView(value, conversion) {
+    return value * conversion;
+  }
+}
+
 export class Converter {
   api: string = 'https://exchangeratesapi.io/api/';
   heading: string = 'Welcome to the Currency Converter';
   http: HttpClient;
-  value: number = 1;
   exchange: Exchange;
   currencies: string[] = Object.keys(Currency).filter(key => !!Currency[key] || !isNaN(Number(Currency[key])));
+
+  amountFrom: number = 1;
   currencyFrom: Currency = Currency.PLN;
 
   constructor(@lazy(HttpClient) private getHttpClient: () => HttpClient) {
     console.log(this.currencies);
   }
 
-  @computedFrom('firstName', 'lastName')
-  get fullName(): string {
-    return `${this.value} ${this.exchange.rates['PLN']} ${this.currencyFrom}`;
+  @computedFrom('amountFrom', 'currencyFrom')
+  get amountTo(): number {
+    return this.amountFrom * this.exchange.rates[this.currencyFrom];
+    // return `${this.amountFrom} ${this.exchange.rates['PLN']} ${this.currencyFrom}`;
   }
 
   async activate(): Promise<void> {
