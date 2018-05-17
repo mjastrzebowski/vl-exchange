@@ -6,8 +6,8 @@
         <label for="fn">From:</label>
         <select value.bind="selectedProductId">
           <option model.bind="null">Choose...</option>
-          <option repeat.for="rate of Currency">
-            ${rate} - ${rate.key}
+          <option repeat.for="currency of currencies">
+            ${currency}
           </option>
         </select>
         <input type="text" value.bind="amountFrom" class="form-control" id="af">

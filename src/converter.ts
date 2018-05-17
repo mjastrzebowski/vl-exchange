@@ -4,13 +4,7 @@ import {HttpClient} from 'aurelia-fetch-client';
 // polyfill fetch client conditionally
 const fetch = !self.fetch ? System.import('isomorphic-fetch') : Promise.resolve(self.fetch);
 
-enum Currency {
-  AUD = 'AUD',
-  PLN = 'PLN',
-  USD = 'USD',
-  GBP = 'GBP',
-  EUR = 'EUR'
-}
+enum Currency { PLN, USD, GBP, EUR }
 
 interface Map<T> {
   [key: string]: T;
@@ -28,10 +22,12 @@ export class Converter {
   http: HttpClient;
   value: number = 1;
   exchange: Exchange;
-  
+  currencies: string[] = Object.keys(Currency).filter(key => !isNaN(Number(Currency[key])));
   // previousValue: string = this.fullName;
 
-  constructor(@lazy(HttpClient) private getHttpClient: () => HttpClient) {}
+  constructor(@lazy(HttpClient) private getHttpClient: () => HttpClient) {
+    console.log(this.currencies);
+  }
 
   @computedFrom('firstName', 'lastName')
   get fullName(): string {
