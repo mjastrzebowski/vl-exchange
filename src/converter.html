@@ -4,9 +4,8 @@
     <form role="form" submit.delegate="submit()">
       <div class="form-group">
         <label for="fn">From:</label>
-        <select value.bind="selectedProductId">
-          <option model.bind="null">Choose...</option>
-          <option repeat.for="currency of currencies">
+        <select value.bind="currencyFrom">
+          <option repeat.for="currency of currencies" value.bind="currency">
             ${currency}
           </option>
         </select>
