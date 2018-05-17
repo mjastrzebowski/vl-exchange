@@ -1,4 +1,4 @@
-# aurelia-skeleton-webpack
+# Currency Converter by Michał Jastrzębowski
 
 ## Getting started
 
@@ -20,7 +20,7 @@ npm start
 ```
 
 This command starts the webpack development server that serves the build bundles.
-You can now browse the skeleton app at http://localhost:9000. Changes in the code
+You can now browse the app at http://localhost:9000. Changes in the code
 will automatically build and reload the app.
 
 ## Feature configuration

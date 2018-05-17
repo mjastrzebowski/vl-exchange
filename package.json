@@ -1,7 +1,7 @@
 {
-  "name": "aurelia-skeleton-navigation-webpack",
-  "version": "1.1.2",
-  "description": "A starter kit for building a standard navigation-style app with Aurelia and webpack.",
+  "name": "mj-currency-converter",
+  "version": "1.0.0",
+  "description": "Application to convert the given amount of money from one currency to another.",
   "main": "dist/main.js",
   "scripts": {
     "pretest": "del-cli \"test/coverage\"",
@@ -38,10 +38,6 @@
     "webpack": "cross-env TS_NODE_PROJECT=tsconfig.tsnode.json TS_NODE_FAST=true ./node_modules/.bin/webpack",
     "webpack-dev-server": "cross-env TS_NODE_PROJECT=tsconfig.tsnode.json TS_NODE_FAST=true ./node_modules/.bin/webpack-dev-server"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/aurelia/skeleton-navigation.git"
-  },
   "keywords": [
     "aurelia",
     "skeleton",
@@ -49,19 +45,15 @@
     "webpack"
   ],
   "license": "CC0-1.0",
-  "author": "Rob Eisenberg <rob@bluespire.com> (http://robeisenberg.com/)",
-  "contributors": [
-    {
-      "name": "Arjen de Blok"
-    },
-    {
-      "name": "Bazyli Brzóska <bazyli.brzoska@gmail.com> (https://invent.life)"
-    }
-  ],
-  "bugs": {
-    "url": "https://github.com/aurelia/skeleton-navigation/issues"
+  "author": "Michał Jastrzębowski <michal@jastrzebowski.pl> (http://jastrzebowski.pl/)",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mjastrzebowski/mj-currency-converter.git"
   },
-  "homepage": "https://github.com/aurelia/skeleton-navigation#readme",
+  "bugs": {
+    "url": "https://github.com/mjastrzebowski/mj-currency-converter/issues"
+  },
+  "homepage": "https://github.com/mjastrzebowski/mj-currency-converter#readme",
   "aurelia": {
     "build": {
       "resources": []
