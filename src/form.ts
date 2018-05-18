@@ -3,18 +3,41 @@ import { computedFrom } from 'aurelia-framework';
 import { asyncBindable } from 'aurelia-async-bindable-bluebird';
 import { Currency, CurrencyValueConverter } from './converter';
 
+interface Rate {
+  currency: Currency;
+  amount: number;
+}
+
 export class Converter {
   heading: string = 'Currency Converter';
   currencies: string[] = Object.keys(Currency).filter(key => !!Currency[key] || !isNaN(Number(Currency[key])));
 
-  amountFrom: number;
+  rateNumber: number = 1;
+  amountFrom: number = 1;
+  // amountTo: number = 1;
   currencyFrom: Currency = Currency.PLN;
   currencyTo: Currency = Currency.EUR;
 
   @asyncBindable()
-  @computedFrom('amountFrom', 'currencyFrom', 'currencyTo')
-  get amountTo(): Promise<number | null> {
+  @computedFrom('currencyFrom', 'currencyTo')
+  get rate(): Promise<number | null> {
     const converter = new CurrencyValueConverter(() => new HttpClient);
-    return converter.toView(this.amountFrom, this.currencyFrom, this.currencyTo);
+    // this.rateNumber = 2;
+    return converter.getRates(this.currencyFrom, this.currencyTo).then((rate: number) => {
+      this.rateNumber = rate;
+      return rate;
+    });
+  }
+
+  @computedFrom('amountFrom', 'rateNumber')
+  get amountTo(): number {
+    // const converter = new CurrencyValueConverter(() => new HttpClient);
+    return this.amountFrom * this.rateNumber;
+  }
+
+  swap() {
+    const currencyTmp = this.currencyFrom;
+    this.currencyFrom = this.currencyTo;
+    this.currencyTo = currencyTmp;
   }
 }

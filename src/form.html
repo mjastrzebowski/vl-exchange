@@ -17,20 +17,22 @@
       </div>
 
       <div class="form-group">
-        <p class="rate-badge">
-          <svg viewBox="0 0 490 490" style="enable-background: new 0 0 490 490">
-            <g>
-              <polygon points="221.191,452.914 154.006,404.131 428.299,404.131 428.299,358.303 154.004,358.303 221.206,309.506 
-                194.264,272.419 44.456,381.217 194.279,490 	"/>
-              <polygon points="268.794,180.509 295.737,217.595 445.544,108.798 295.737,0 268.794,37.086 335.996,85.884 61.701,85.884 
-                61.701,131.712 335.996,131.712 	"/>
-            </g>
-          </svg>
+        <p class="rate-badge svg-container">
           <svg viewBox="0 0 24 24">
             <path d="M0 17.83l8.9-9.5 4.8 5.1 5.82-6.25-2.71-2.91h7.34v7.76l-2.86-3-7.6 8-4.77-5.1-7.2 7.7z"></path>
           </svg>
-          1 ${currencyFrom} = 
-          ${1 | currency: currencyFrom : currencyTo & async } ${currencyTo}</p>
+          1 ${currencyFrom} = ${rate | number: 8} ${currencyTo}
+        </p>
+        <a click.delegate="swap()" class="btn btn-default btn-swap svg-container">
+          <svg viewBox="0 0 490 490" style="enable-background: new 0 0 490 490">
+            <g>
+              <polygon points="221.191,452.914 154.006,404.131 428.299,404.131 428.299,358.303 154.004,358.303 221.206,309.506 
+                194.264,272.419 44.456,381.217 194.279,490"/>
+              <polygon points="268.794,180.509 295.737,217.595 445.544,108.798 295.737,0 268.794,37.086 335.996,85.884 61.701,85.884 
+                61.701,131.712 335.996,131.712"/>
+            </g>
+          </svg>
+        </a>
       </div>
   
       <div class="form-group">
@@ -40,7 +42,7 @@
             ${currency}
           </option>
         </select>
-        <input type="text" value.to-view="amountTo" class="form-control" id="at">
+        <input type="text" value.to-view="amountTo | number: 4" class="form-control" id="at">
       </div>
 
     </form>
