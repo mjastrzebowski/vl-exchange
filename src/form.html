@@ -1,7 +1,9 @@
 <template>
+  <require from="./converter"></require>
+
   <section class="au-animate">
     <h2>${heading}</h2>
-    <form role="form" submit.delegate="submit()">
+    <form role="form">
       <div class="form-group">
         <label for="cf">From:</label>
         <select value.bind="currencyFrom" id="cf">
@@ -18,7 +20,7 @@
             ${currency}
           </option>
         </select>
-        <input type="text" value.to-view="amountFrom | currencyFormat: exchange.rates[currencyFrom]" class="form-control" id="at">
+        <input type="text" value.to-view="amountFrom | currency: exchange.rates[currencyFrom]" class="form-control" id="at">
       </div>
       <div class="form-group">
         <label>Convert</label>

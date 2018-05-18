@@ -1,10 +1,10 @@
-import {computedFrom, lazy} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-fetch-client';
+import { computedFrom, lazy } from 'aurelia-framework';
+import { HttpClient } from 'aurelia-fetch-client';
 
 // polyfill fetch client conditionally
 const fetch = !self.fetch ? System.import('isomorphic-fetch') : Promise.resolve(self.fetch);
 
-enum Currency {
+export enum Currency {
   PLN = 'PLN',
   USD = 'USD',
   GBP = 'GBP',
@@ -22,33 +22,15 @@ interface Exchange {
   rates: Map<number>;
 }
 
-export class CurrencyFormatValueConverter {
-  toView(value, conversion) {
-    return value * conversion;
-  }
-}
-
-export class Converter {
+export class CurrencyValueConverter {
   api: string = 'https://exchangeratesapi.io/api/';
   heading: string = 'Welcome to the Currency Converter';
   http: HttpClient;
   exchange: Exchange;
-  currencies: string[] = Object.keys(Currency).filter(key => !!Currency[key] || !isNaN(Number(Currency[key])));
 
-  amountFrom: number = 1;
-  currencyFrom: Currency = Currency.PLN;
+  constructor(@lazy(HttpClient) private getHttpClient: () => HttpClient) {}
 
-  constructor(@lazy(HttpClient) private getHttpClient: () => HttpClient) {
-    console.log(this.currencies);
-  }
-
-  @computedFrom('amountFrom', 'currencyFrom')
-  get amountTo(): number {
-    return this.amountFrom * this.exchange.rates[this.currencyFrom];
-    // return `${this.amountFrom} ${this.exchange.rates['PLN']} ${this.currencyFrom}`;
-  }
-
-  async activate(): Promise<void> {
+  async getRates(currency: Currency): Promise<void> {
     // ensure fetch is polyfilled before we create the http client
     await fetch;
     const http = this.http = this.getHttpClient();
@@ -59,17 +41,14 @@ export class Converter {
         .withBaseUrl(this.api);
     });
 
-    const response = await http.fetch('latest');
+    const response = await http.fetch(`latest?base=${currency}`);
     this.exchange = await response.json();
+    console.log(this.exchange);
   }
 
-  // submit() {
-  //   alert(`Welcome, ${this.fullName}!`);
-  // }
-}
-
-export class UpperValueConverter {
-  toView(value: string): string {
-    return value && value.toUpperCase();
+  toView(value: number, conversion: number): number {
+    console.log('toview');
+    this.getRates(Currency.PLN);
+    return value * conversion;
   }
 }
