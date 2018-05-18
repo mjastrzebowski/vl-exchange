@@ -26,22 +26,26 @@ export class CurrencyValueConverter {
   api: string = 'https://exchangeratesapi.io/api/';
   http: HttpClient;
   exchange: Exchange;
+  lastBase: Currency;
 
   constructor(@lazy(HttpClient) private getHttpClient: () => HttpClient) {}
 
   async getRates(currencyFrom: Currency, currencyTo: Currency): Promise<number> {
-    // ensure fetch is polyfilled before we create the http client
-    await fetch;
-    const http = this.http = this.getHttpClient();
+    if (this.lastBase !== currencyFrom) {
+      this.lastBase = currencyFrom;
+      // ensure fetch is polyfilled before we create the http client
+      await fetch;
+      const http = this.http = this.getHttpClient();
 
-    http.configure(config => {
-      config
-        .useStandardConfiguration()
-        .withBaseUrl(this.api);
-    });
+      http.configure(config => {
+        config
+          .useStandardConfiguration()
+          .withBaseUrl(this.api);
+      });
 
-    const response = await http.fetch(`latest?base=${currencyFrom}`);
-    this.exchange = await response.json();
+      const response = await http.fetch(`latest?base=${currencyFrom}`);
+      this.exchange = await response.json();
+    }
     return this.exchange.rates[currencyTo];
   }
 
