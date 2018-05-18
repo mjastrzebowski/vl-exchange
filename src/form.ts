@@ -10,11 +10,9 @@ export class Converter {
   currencyFrom: Currency = Currency.PLN;
   currencyTo: Currency = Currency.EUR;
 
-  // another possible way to provide the conversion:
-  //
-  // @computedFrom('amountFrom', 'currencyFrom', 'currencyTo')
-  // get amountTo(): Promise<number> {
-  //   const converter = new CurrencyValueConverter(() => new HttpClient);
-  //   return converter.toView(this.amountFrom, this.currencyFrom, this.currencyTo);
-  // }
+  @computedFrom('amountFrom', 'currencyFrom', 'currencyTo')
+  get amountTo(): Promise<number | null> {
+    const converter = new CurrencyValueConverter(() => new HttpClient);
+    return converter.toView(this.amountFrom, this.currencyFrom, this.currencyTo).then(data => data);
+  }
 }
