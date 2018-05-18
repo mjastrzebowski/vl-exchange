@@ -16,6 +16,12 @@
       </div>
 
       <div class="form-group">
+        <label>Conversion rate</label>
+        <p class="help-block"> 1 ${currencyFrom} = 
+          ${1 | currency: currencyFrom : currencyTo & async} ${currencyTo}</p>
+      </div>
+  
+      <div class="form-group">
         <label for="ct">To:</label>
         <select value.bind="currencyTo" id="ct">
           <option repeat.for="currency of currencies" value.bind="currency">

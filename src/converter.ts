@@ -4,14 +4,6 @@ import { HttpClient } from 'aurelia-fetch-client';
 // polyfill fetch client conditionally
 const fetch = !self.fetch ? System.import('isomorphic-fetch') : Promise.resolve(self.fetch);
 
-export enum Currency {
-  PLN = 'PLN',
-  USD = 'USD',
-  GBP = 'GBP',
-  EUR = 'EUR',
-  RON = 'RON'
-}
-
 interface Map<T> {
   [key: string]: T;
 }
@@ -20,6 +12,14 @@ interface Exchange {
   base: string;
   date: string;
   rates: Map<number>;
+}
+
+export enum Currency {
+  PLN = 'PLN',
+  USD = 'USD',
+  GBP = 'GBP',
+  EUR = 'EUR',
+  RON = 'RON'
 }
 
 export class CurrencyValueConverter {
@@ -46,11 +46,10 @@ export class CurrencyValueConverter {
       const response = await http.fetch(`latest?base=${currencyFrom}`);
       this.exchange = await response.json();
     }
-    return this.exchange.rates[currencyTo];
+    return this.exchange ? this.exchange.rates[currencyTo] : 1;
   }
 
   toView(value: number, currencyFrom: Currency, currencyTo: Currency): Promise<number> {
-    console.log('toview', currencyFrom, currencyTo);
     return this.getRates(currencyFrom, currencyTo)
       .then((rate: number) => value * rate);
   }
