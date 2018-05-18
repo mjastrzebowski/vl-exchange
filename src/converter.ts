@@ -24,13 +24,12 @@ interface Exchange {
 
 export class CurrencyValueConverter {
   api: string = 'https://exchangeratesapi.io/api/';
-  heading: string = 'Welcome to the Currency Converter';
   http: HttpClient;
   exchange: Exchange;
 
   constructor(@lazy(HttpClient) private getHttpClient: () => HttpClient) {}
 
-  async getRates(currency: Currency): Promise<void> {
+  async getRates(currencyFrom: Currency, currencyTo: Currency): Promise<number> {
     // ensure fetch is polyfilled before we create the http client
     await fetch;
     const http = this.http = this.getHttpClient();
@@ -41,14 +40,14 @@ export class CurrencyValueConverter {
         .withBaseUrl(this.api);
     });
 
-    const response = await http.fetch(`latest?base=${currency}`);
+    const response = await http.fetch(`latest?base=${currencyFrom}`);
     this.exchange = await response.json();
-    console.log(this.exchange);
+    return this.exchange.rates[currencyTo];
   }
 
-  toView(value: number, conversion: number): number {
-    console.log('toview');
-    this.getRates(Currency.PLN);
-    return value * conversion;
+  toView(value: number, currencyFrom: Currency, currencyTo: Currency): Promise<number> {
+    console.log('toview', currencyFrom, currencyTo);
+    return this.getRates(currencyFrom, currencyTo)
+      .then((rate: number) => value * rate);
   }
 }

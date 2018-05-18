@@ -6,4 +6,5 @@ export class Converter {
 
   amountFrom: number = 1;
   currencyFrom: Currency = Currency.PLN;
+  currencyTo: Currency = Currency.RON;
 }
