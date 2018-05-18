@@ -1,5 +1,6 @@
 import { HttpClient } from 'aurelia-fetch-client';
 import { computedFrom } from 'aurelia-framework';
+import { asyncBindable } from 'aurelia-async-bindable-bluebird';
 import { Currency, CurrencyValueConverter } from './converter';
 
 export class Converter {
@@ -10,9 +11,10 @@ export class Converter {
   currencyFrom: Currency = Currency.PLN;
   currencyTo: Currency = Currency.EUR;
 
+  @asyncBindable()
   @computedFrom('amountFrom', 'currencyFrom', 'currencyTo')
   get amountTo(): Promise<number | null> {
     const converter = new CurrencyValueConverter(() => new HttpClient);
-    return converter.toView(this.amountFrom, this.currencyFrom, this.currencyTo).then(data => data);
+    return converter.toView(this.amountFrom, this.currencyFrom, this.currencyTo);
   }
 }
