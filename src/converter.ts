@@ -49,8 +49,8 @@ export class CurrencyValueConverter {
     return this.exchange ? this.exchange.rates[currencyTo] : 1;
   }
 
-  toView(value: number, currencyFrom: Currency, currencyTo: Currency): Promise<number> {
+  toView(value: number, currencyFrom: Currency, currencyTo: Currency): Promise<number | null> {
     return this.getRates(currencyFrom, currencyTo)
-      .then((rate: number) => value * rate);
+      .then((rate: number) => value * rate || null);
   }
 }

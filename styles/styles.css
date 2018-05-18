@@ -173,3 +173,25 @@ div.au-stagger {
     opacity: 1;
   }
 }
+
+.rate-badge {
+  display: inline-block;
+  line-height: 24px;
+  height: 24px;
+  border: 1px solid #EFF0F1;
+  border-radius: 2px;
+  color: #6A737C;
+  font-size: 12px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin-bottom: 6px;
+}
+.rate-badge svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 2px;
+  width: 14px;
+  height: 14px;
+  margin-right: 3px;
+  fill: #6ABE62;
+}

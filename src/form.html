@@ -6,23 +6,26 @@
     <form role="form">
 
       <div class="form-group">
-        <label for="cf">From:</label>
+        <label for="af">From:</label>
         <select value.bind="currencyFrom" id="cf">
           <option repeat.for="currency of currencies" value.bind="currency">
             ${currency}
           </option>
         </select>
-        <input type="text" value.bind="amountFrom" class="form-control" id="af">
+        <input type="text" value.bind="amountFrom" class="form-control" id="af" autofocus>
       </div>
 
       <div class="form-group">
-        <label>Conversion rate</label>
-        <p class="help-block"> 1 ${currencyFrom} = 
+        <p class="rate-badge">
+          <svg viewBox="0 0 24 24">
+            <path d="M0 17.83l8.9-9.5 4.8 5.1 5.82-6.25-2.71-2.91h7.34v7.76l-2.86-3-7.6 8-4.77-5.1-7.2 7.7z"></path>
+          </svg>
+          1 ${currencyFrom} = 
           ${1 | currency: currencyFrom : currencyTo & async} ${currencyTo}</p>
       </div>
   
       <div class="form-group">
-        <label for="ct">To:</label>
+        <label for="at">To:</label>
         <select value.bind="currencyTo" id="ct">
           <option repeat.for="currency of currencies" value.bind="currency">
             ${currency}
