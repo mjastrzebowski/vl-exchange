@@ -21,17 +21,16 @@ export class Converter {
   @asyncBindable()
   @computedFrom('currencyFrom', 'currencyTo')
   get rate(): Promise<number | null> {
-    const converter = new CurrencyValueConverter(() => new HttpClient);
-    // this.rateNumber = 2;
-    return converter.getRates(this.currencyFrom, this.currencyTo).then((rate: number) => {
-      this.rateNumber = rate;
-      return rate;
-    });
+    return new CurrencyValueConverter(() => new HttpClient)
+      .getRates(this.currencyFrom, this.currencyTo)
+      .then((rate: number) => {
+        this.rateNumber = rate;
+        return rate;
+      });
   }
 
   @computedFrom('amountFrom', 'rateNumber')
   get amountTo(): number {
-    // const converter = new CurrencyValueConverter(() => new HttpClient);
     return this.amountFrom * this.rateNumber;
   }
 
@@ -39,5 +38,7 @@ export class Converter {
     const currencyTmp = this.currencyFrom;
     this.currencyFrom = this.currencyTo;
     this.currencyTo = currencyTmp;
+
+    this.amountFrom = parseFloat(this.amountTo.toFixed(4));
   }
 }
