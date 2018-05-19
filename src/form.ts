@@ -9,12 +9,12 @@ interface Rate {
 }
 
 export class Converter {
+  digits: number = 4;
   heading: string = 'Currency Converter';
   currencies: string[] = Object.keys(Currency).filter(key => !!Currency[key] || !isNaN(Number(Currency[key])));
 
   rateNumber: number = 1;
   amountFrom: number = 1;
-  // amountTo: number = 1;
   currencyFrom: Currency = Currency.PLN;
   currencyTo: Currency = Currency.EUR;
 
@@ -39,6 +39,6 @@ export class Converter {
     this.currencyFrom = this.currencyTo;
     this.currencyTo = currencyTmp;
 
-    this.amountFrom = parseFloat(this.amountTo.toFixed(4));
+    this.amountFrom = parseFloat(this.amountTo.toFixed(this.digits));
   }
 }

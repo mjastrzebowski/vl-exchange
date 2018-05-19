@@ -21,7 +21,7 @@
           <svg viewBox="0 0 24 24">
             <path d="M0 17.83l8.9-9.5 4.8 5.1 5.82-6.25-2.71-2.91h7.34v7.76l-2.86-3-7.6 8-4.77-5.1-7.2 7.7z"></path>
           </svg>
-          1 ${currencyFrom} = ${rate | number: 8} ${currencyTo}
+          1 ${currencyFrom} = ${rate | number: digits*2} ${currencyTo}
         </p>
         <a click.delegate="swap()" class="btn btn-default btn-swap svg-container">
           <svg viewBox="0 0 490 490" style="enable-background: new 0 0 490 490">
@@ -42,7 +42,7 @@
             ${currency}
           </option>
         </select>
-        <input type="text" value.to-view="amountTo | number: 4" class="form-control" id="at">
+        <input type="text" value.to-view="amountTo | number: digits" class="form-control" id="at">
       </div>
 
     </form>
