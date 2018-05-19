@@ -21,7 +21,7 @@ import * as copyFiles from '@easy-webpack/config-copy-files';
 import * as uglify from '@easy-webpack/config-uglify';
 import * as generateCoverage from '@easy-webpack/config-test-coverage-istanbul';
 
-const ENV: 'development' | 'production' | 'test' = process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() || (process.env.NODE_ENV = 'development');
+const ENV: 'development' | 'production' | 'test' | string = process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() || (process.env.NODE_ENV = 'development');
 
 // basic configuration:
 const title = 'Currency Converter';

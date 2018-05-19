@@ -5,7 +5,7 @@ export class App {
   router: Router;
 
   configureRouter(config: RouterConfiguration, router: Router) {
-    config.title = 'Currency Converter App';
+    config.title = 'Currency Converter';
     config.map([{
       route: ['', 'form'],
       name: 'form',
