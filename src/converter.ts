@@ -1,5 +1,7 @@
 import { computedFrom, lazy } from 'aurelia-framework';
 import { HttpClient } from 'aurelia-fetch-client';
+import { activationStrategy } from 'aurelia-router';
+import { SSL_OP_COOKIE_EXCHANGE } from 'constants';
 
 // polyfill fetch client conditionally
 const fetch = !self.fetch ? System.import('isomorphic-fetch') : Promise.resolve(self.fetch);

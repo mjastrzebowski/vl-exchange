@@ -13,11 +13,12 @@
     ]
   },
   "awesomeTypescriptLoaderOptions": {
-    "forkChecker": true
+    "forkChecker": true,
+    "reportFiles": [
+      "./src/**/*"
+    ]
   },
-  "exclude": [
-    "node_modules",
-    "dist",
-    "test"
+  "include": [
+    "./src/**/*"
   ]
 }
