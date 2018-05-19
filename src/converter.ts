@@ -49,8 +49,11 @@ export class CurrencyValueConverter {
     return this.exchange ? this.exchange.rates[currencyTo] : 1;
   }
 
-  toView(value: number, currencyFrom: Currency, currencyTo: Currency): Promise<number | null> {
-    return this.getRates(currencyFrom, currencyTo)
-      .then((rate: number) => value * rate || null);
-  }
+  // Uncomment below function to use in template this way:
+  // ${value | currency: currencyFrom : currencyTo & async }
+  //
+  // toView(value: number, currencyFrom: Currency, currencyTo: Currency): Promise<number | null> {
+  //   return this.getRates(currencyFrom, currencyTo)
+  //     .then((rate: number) => value * rate || null);
+  // }
 }

@@ -192,7 +192,7 @@ section {
   padding-right: 6px;
   margin-bottom: 6px;
 }
-.rate-badge svg {
+.svg-container svg {
   display: inline-block;
   vertical-align: middle;
   margin-bottom: 2px;
@@ -200,4 +200,14 @@ section {
   height: 14px;
   margin-right: 3px;
   fill: #6ABE62;
+}
+.btn-swap {
+  margin: 0 1em;
+}
+.btn-swap svg {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
