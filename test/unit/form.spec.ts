@@ -1,6 +1,6 @@
 import './setup';
-import {HttpClient} from 'aurelia-fetch-client';
-import {Form} from '../../src/form';
+import { HttpClient } from 'aurelia-fetch-client';
+import { Form } from '../../src/form';
 
 class HttpStub extends HttpClient {
   url;
@@ -20,22 +20,15 @@ class HttpStub extends HttpClient {
 }
 
 describe('the Form module', () => {
-  // it('sets fetch response to users', (done) => {
-  //   var itemStubs = [1];
-  //   var itemFake = [2];
+  it('amountTo is computed correctly', () => {
+    var amountFrom = 2;
+    var rateNumber = 3;
+    var result = 6;
 
-  //   var getHttp = () => {
-  //     var http = new HttpStub();
-  //     http.itemStub = itemStubs;
-  //     return http;
-  //   };
-
-  //   var sut = new Form();
-
-  //   // sut.activate().then(() => {
-  //   //   expect(sut.users).toBe(itemStubs);
-  //   //   expect(sut.users).not.toBe(itemFake);
-  //   //   done();
-  //   // });
-  // });
+    var form = new Form();
+    form.amountFrom = amountFrom;
+    form.rateNumber = rateNumber;
+    
+    expect(form.amountTo).toBe(result);
+  });
 });

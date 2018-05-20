@@ -1,5 +1,5 @@
 import './setup';
-import {App} from '../../src/app';
+import { App } from '../../src/app';
 
 class RouterStub {
   routes;
