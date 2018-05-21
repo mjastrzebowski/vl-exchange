@@ -8,7 +8,7 @@ interface Rate {
   amount: number;
 }
 
-export class Form {
+export class ConverterForm {
   digits: number = 4;
   heading: string = 'Currency Converter';
   currencies: string[] = Object.keys(Currency).filter(key => !!Currency[key] || !isNaN(Number(Currency[key])));
