@@ -31,4 +31,16 @@ describe('the Form module', () => {
     
     expect(form.amountTo).toBe(result);
   });
+
+  it('amountTo cannot be set manually', () => {
+    var amountTo = 2;
+
+    var form = new Form();
+    try {
+      form.amountTo = amountTo;
+    } catch (e) {
+      expect(e).not.toBeNull();
+    }
+    expect(form.amountTo).not.toBe(amountTo);
+  });
 });
