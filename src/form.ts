@@ -12,6 +12,7 @@ export class ConverterForm {
   digits: number = 4;
   heading: string = 'Currency Converter';
   currencies: string[] = Object.keys(Currency).filter(key => !!Currency[key] || !isNaN(Number(Currency[key])));
+  // currencies: string[] = Object.keys(Currency).filter(key => isNaN(Number(key)));
 
   rateNumber: number = 1;
   amountFrom: number = 1;

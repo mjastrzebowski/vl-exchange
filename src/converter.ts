@@ -17,11 +17,11 @@ interface Exchange {
 }
 
 export enum Currency {
-  PLN,
-  USD,
-  GBP,
-  EUR,
-  RON
+  PLN = 'PLN',
+  USD = 'USD',
+  GBP = 'GBP',
+  EUR = 'EUR',
+  RON = 'RON'
 }
 
 export class CurrencyValueConverter {
