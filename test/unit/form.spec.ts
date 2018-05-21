@@ -1,6 +1,6 @@
 import './setup';
 import { Currency } from '../../src/converter';
-import { Form } from '../../src/form';
+import { ConverterForm } from '../../src/form';
 
 describe('Form module', () => {
   xdescribe('rate property', () => {
@@ -9,7 +9,7 @@ describe('Form module', () => {
       var currencyTo = Currency.EUR;
       var result = 6;
 
-      var form = new Form();
+      var form = new ConverterForm();
       form.currencyFrom = currencyFrom;
       form.currencyTo = currencyTo;
       
@@ -23,7 +23,7 @@ describe('Form module', () => {
       var rateNumber = 3;
       var result = 6;
 
-      var form = new Form();
+      var form = new ConverterForm();
       form.amountFrom = amountFrom;
       form.rateNumber = rateNumber;
 
@@ -33,7 +33,7 @@ describe('Form module', () => {
     it('cannot be set manually', () => {
       var amountTo = 2;
 
-      var form = new Form();
+      var form = new ConverterForm();
       try {
         form.amountTo = amountTo;
       } catch (e) {
@@ -48,7 +48,7 @@ describe('Form module', () => {
       var currencyFrom = Currency.PLN;
       var currencyTo = Currency.EUR;
 
-      var form = new Form();
+      var form = new ConverterForm();
       form.currencyFrom = currencyFrom;
       form.currencyTo = currencyTo;
       form.swap();
@@ -63,7 +63,7 @@ describe('Form module', () => {
       var amountTo = 6;
       var expected = amountTo * rateNumber;
 
-      var form = new Form();
+      var form = new ConverterForm();
       form.amountFrom = amountFrom;
       form.rateNumber = rateNumber;
 
