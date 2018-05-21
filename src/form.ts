@@ -18,10 +18,12 @@ export class ConverterForm {
   currencyFrom: Currency = Currency.PLN;
   currencyTo: Currency = Currency.EUR;
 
+  converter = new CurrencyValueConverter(() => new HttpClient);
+
   @asyncBindable()
   @computedFrom('currencyFrom', 'currencyTo')
   get rate(): Promise<number | null> {
-    return new CurrencyValueConverter(() => new HttpClient)
+    return this.converter
       .getRates(this.currencyFrom, this.currencyTo)
       .then((rate: number) => {
         this.rateNumber = rate;

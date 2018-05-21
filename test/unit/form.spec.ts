@@ -3,17 +3,15 @@ import { Currency } from '../../src/converter';
 import { ConverterForm } from '../../src/form';
 
 describe('Form module', () => {
-  xdescribe('rate property', () => {
+  describe('rate property', () => {
     it('is using converter', () => {
       var currencyFrom = Currency.PLN;
-      var currencyTo = Currency.EUR;
-      var result = 6;
 
       var form = new ConverterForm();
-      form.currencyFrom = currencyFrom;
-      form.currencyTo = currencyTo;
+      spyOn(form.converter, 'getRates').and.callThrough();
+      var tmp = form.rate;
       
-      expect(form.amountTo).toBe(result);
+      expect(form.converter.getRates).toHaveBeenCalled();
     });
   });
 
