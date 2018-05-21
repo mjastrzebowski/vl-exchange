@@ -88,7 +88,7 @@ module.exports = function(config) {
      * available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
      */
     browsers: [
-      'ChromeDriver',
+      'Chrome',
       // TODO: https://www.npmjs.com/package/karma-electron
     ],
 
