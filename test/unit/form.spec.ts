@@ -1,27 +1,22 @@
 import './setup';
-import { HttpClient } from 'aurelia-fetch-client';
-
 import { Currency } from '../../src/converter';
 import { Form } from '../../src/form';
 
-class HttpStub extends HttpClient {
-  url;
-  itemStub;
-  
-  fetch(url): any {
-    var response = this.itemStub;
-    this.url = url;
-    return new Promise((resolve) => {
-      resolve({ json: () => response });
-    });
-  }
-
-  configure(config) {
-    return this;
-  }
-}
-
 describe('Form module', () => {
+  xdescribe('rate property', () => {
+    it('is using converter', () => {
+      var currencyFrom = Currency.PLN;
+      var currencyTo = Currency.EUR;
+      var result = 6;
+
+      var form = new Form();
+      form.currencyFrom = currencyFrom;
+      form.currencyTo = currencyTo;
+      
+      expect(form.amountTo).toBe(result);
+    });
+  });
+
   describe('amountTo property', () => {
     it('is computed correctly', () => {
       var amountFrom = 2;
@@ -31,7 +26,7 @@ describe('Form module', () => {
       var form = new Form();
       form.amountFrom = amountFrom;
       form.rateNumber = rateNumber;
-      
+
       expect(form.amountTo).toBe(result);
     });
 

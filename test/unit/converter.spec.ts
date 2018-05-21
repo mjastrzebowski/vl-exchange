@@ -1,5 +1,7 @@
 import './setup';
 import { HttpClient } from 'aurelia-fetch-client';
+
+import { Currency } from '../../src/converter';
 import { Form } from '../../src/form';
 
 class HttpStub extends HttpClient {
@@ -19,16 +21,16 @@ class HttpStub extends HttpClient {
   }
 }
 
-xdescribe('the Converter module', () => {
+describe('Converter module', () => {
   it('amountTo is computed correctly', (done) => {
     var itemStubs = [1];
     var itemFake = [2];
 
-  //   var getHttp = () => {
-  //     var http = new HttpStub();
-  //     http.itemStub = itemStubs;
-  //     return http;
-  //   };
+    var getHttp = () => {
+      var http = new HttpStub();
+      http.itemStub = itemStubs;
+      return http;
+    };
 
   //   var sut = new Form();
 
